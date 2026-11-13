@@ -1,0 +1,2196 @@
+/* GLOBAL RESET: Makes element sizing predictable by including padding and borders in width/height. */
+* {
+    box-sizing: border-box;
+}
+
+/* THEME VARIABLES: Centralized colors used throughout the interface. */
+:root {
+    --purple-dark: #2d195a;
+    --purple: #3b2174;
+    --purple-light: #eee9ff;
+    --yellow: #ffd36c;
+    --orange: #c27a0b;
+    --background: #f6f5fc;
+    --white: #ffffff;
+    --text: #11143e;
+    --muted: #77738a;
+    --border: #dfdcea;
+}
+
+/* HTML BASE: Enables smooth scrolling for in-page navigation. */
+html {
+    scroll-behavior: smooth;
+}
+
+/* BODY BASE: Sets the page font, background color, text color, and removes default margin. */
+body {
+    margin: 0;
+    font-family: "DM Sans", sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+/* FORM TYPOGRAPHY: Keeps buttons and form controls consistent with the page font. */
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+/* BUTTON CURSOR: Indicates that buttons can be clicked. */
+button {
+    cursor: pointer;
+}
+
+/* APP: The main wrapper fills at least the full viewport height. */
+
+.app {
+    min-height: 100vh;
+}
+
+/* SIDEBAR: Fixed left navigation area that remains visible while the page scrolls. */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 235px;
+    padding: 24px 18px;
+    background: linear-gradient(180deg, #38216c 0%, #24154d 100%);
+    color: white;
+    z-index: 5;
+}
+
+/* BRAND: Styles the logo, decorative books, product name, and subtitle. */
+
+.brand {
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+.brand-logo {
+    position: relative;
+    width: 72px;
+    height: 58px;
+    margin: auto;
+}
+
+.logo-book {
+    position: absolute;
+    width: 31px;
+    height: 42px;
+    top: 5px;
+    border-radius: 4px 4px 2px 2px;
+}
+
+.book-one {
+    left: 8px;
+    background: #ffd36c;
+    transform: rotate(-5deg);
+}
+
+.book-two {
+    right: 8px;
+    background: #ffca4f;
+    transform: rotate(5deg);
+}
+
+.brand-name {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.brand-subtitle {
+    font-size: 12px;
+    margin-top: 3px;
+    opacity: .9;
+}
+
+/* NAV: Controls navigation button layout, spacing, hover, and active states. */
+
+.nav {
+    border-top: 1px solid rgba(255, 255, 255, .2);
+    padding-top: 17px;
+}
+
+.nav-item {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: white;
+    padding: 13px 14px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, .09);
+}
+
+.nav-item.active {
+    background: var(--yellow);
+    color: #25154c;
+}
+
+.nav-icon {
+    width: 25px;
+    text-align: center;
+    font-size: 21px;
+}
+
+/* QUOTE: Positions and styles the inspirational text near the bottom of the sidebar. */
+
+.sidebar-quote {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 35px;
+    border-top: 1px solid rgba(255, 255, 255, .25);
+    padding: 28px 10px 0;
+    font-family: Georgia, serif;
+    line-height: 1.7;
+}
+
+.sidebar-quote small {
+    display: block;
+    margin-top: 7px;
+    font-family: "DM Sans";
+    font-size: 11px;
+}
+
+/* MAIN: Sets the content area offset to make room for the fixed sidebar. */
+
+.main {
+    margin-left: 235px;
+    min-height: 100vh;
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOPBAR: Arranges global search and user actions in one horizontal row. */
+
+.topbar {
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.global-search {
+    width: 50%;
+    background: #efedf8;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    padding: 0 17px;
+}
+
+.search-icon {
+    font-size: 25px;
+    margin-right: 9px;
+}
+
+.global-search input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    padding: 12px 0;
+}
+
+/* PAGE: Hides inactive pages and displays the page marked as active. */
+
+.page {
+    display: none;
+    flex: 1;
+}
+
+.active-page {
+    display: block;
+}
+
+/* HERO: Styles the dashboard introduction panel and its content columns. */
+
+.hero {
+    min-height: 184px;
+    padding: 28px 33px;
+    border-radius: 15px;
+    background: #eeeafb;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 100px;
+    align-items: center;
+    overflow: hidden;
+}
+
+.eyebrow {
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+.hero h1 {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 35px;
+    color: var(--orange);
+    margin: 3px 0;
+}
+
+.hero p {
+    margin: 0;
+    font-size: 13px;
+}
+
+.hero-quote {
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 21px;
+    line-height: 1.5;
+}
+
+.hero-quote small {
+    display: block;
+    margin-top: 8px;
+    color: #81788e;
+    font-size: 16px;
+}
+
+/* HERO BOOKS: Creates decorative book shapes using CSS only. */
+
+.hero-books {
+    position: relative;
+    height: 100px;
+}
+
+.hero-book {
+    position: absolute;
+    width: 45px;
+    height: 68px;
+    border-radius: 4px;
+}
+
+.green-book {
+    left: 10px;
+    top: 8px;
+    background: #8bd94b;
+}
+
+.pink-book {
+    left: 32px;
+    top: 19px;
+    background: #e5327c;
+}
+
+.blue-book {
+    left: 53px;
+    top: 30px;
+    background: #4bc6e5;
+}
+
+/* STAT CARDS: Arranges dashboard totals in responsive cards. */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 18px 0;
+}
+
+.stat-card {
+    min-height: 98px;
+    padding: 16px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+}
+
+.purple-icon {
+    background: #eee5ff;
+    color: #4a2aa4;
+}
+
+.orange-icon {
+    background: #fff0d8;
+    color: #e9900b;
+}
+
+.blue-icon {
+    background: #e7efff;
+    color: #1766ca;
+}
+
+.green-icon {
+    background: #e0f5eb;
+    color: #14835c;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-info strong {
+    display: block;
+    font-size: 30px;
+}
+
+.stat-info span {
+    display: block;
+    font-size: 14px;
+}
+
+/* PANELS: Provides the shared white card appearance for dashboard sections. */
+
+.panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 18px;
+    margin-bottom: 18px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 16px;
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-family:  Georgia, serif;
+    font-size: 22px;
+}
+
+.panel-header p {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.text-button {
+    border: 0;
+    background: transparent;
+    color: var(--purple);
+    font-weight: 700;
+}
+
+/* DASHBOARD: Lays out the dashboard overview lists in columns. */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: 18px;
+}
+
+.overview-list>div {
+    padding: 15px 5px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.overview-list>div:last-child {
+    border-bottom: 0;
+}
+
+.overview-list span {
+    color: #555;
+}
+
+/* PAGE HEADING: Aligns each page title, description, and related action button. */
+
+.page-heading {
+    margin: 22px 0 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-heading h2 {
+    margin: 3px 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 35px;
+}
+
+.page-heading p {
+    margin: 3px 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* BUTTONS: Defines primary actions and return buttons, including hover feedback. */
+
+.primary-button {
+    border: 0;
+    background: var(--purple);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 9px;
+    font-weight: 700;
+}
+
+.primary-button:hover {
+    background: #4d2b87;
+}
+
+.action-return-btn {
+    border: 0;
+    background: #e6f9ed;
+    color: #12824c;
+    border: 1px solid #9ce5b9;
+    padding: 7px 11px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.action-return-btn:hover {
+    background: #12824c;
+    color: white;
+}
+
+/* FILTER BAR: Aligns the book search input and genre dropdown. */
+
+.filter-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.filter-search {
+    flex: 1;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+}
+
+.filter-search span {
+    font-size: 21px;
+    margin-right: 8px;
+}
+
+.filter-search input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    padding: 12px 0;
+}
+
+.filter-bar select {
+    width: 190px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 0 12px;
+    background: white;
+    outline: 0;
+}
+
+/* TABLE: Makes the book record table readable and horizontally scrollable on small screens. */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1150px;
+}
+
+th {
+    padding: 12px;
+    background: var(--purple);
+    color: white;
+    text-align: left;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+}
+
+tr:hover td {
+    background: #faf9fe;
+}
+
+.pill {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #e3f4ec;
+    color: #17765a;
+    font-size: 12px;
+}
+
+.pill-returned {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: #d8f3e5;
+    color: #0b683b;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.user-id {
+    color: var(--purple);
+    background: #eee9ff;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.phone-badge {
+    color: #166534;
+    background: #dcfce7;
+    padding: 4px 7px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.danger-button {
+    border: 0;
+    background: #ffe8ed;
+    color: #c52d50;
+    padding: 7px 10px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 35px;
+    color: #777;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* FINE & DUE BADGES: Uses different colors to distinguish on-time and overdue states. */
+
+.fine-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.fine-badge.ontimed {
+    background: #e6f9ed;
+    color: #12824c;
+    border: 1px solid #c0e8d1;
+}
+
+.fine-badge.overdue {
+    background: #ffeaea;
+    color: #cf1b1b;
+    border: 1px solid #f6b6b6;
+}
+
+.notice-box {
+    background: #f7f4fe;
+    border: 1px dashed var(--purple);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--purple-dark);
+}
+
+/* RECORD CARDS: Styles summary cards and their grid layout. */
+
+.record-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.record-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 18px;
+}
+
+.record-card-icon {
+    font-size: 21px;
+}
+
+.record-card strong {
+    display: block;
+    font-size: 30px;
+    margin-top: 7px;
+}
+
+.record-card span {
+    color: #777;
+    font-size: 13px;
+}
+
+.records-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* RECORD ROW: Formats individual book and author rows shown in overview lists. */
+
+.record-row {
+    padding: 13px 5px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.record-row:last-child {
+    border-bottom: 0;
+}
+
+.record-row small {
+    display: block;
+    color: #777;
+    margin-top: 3px;
+}
+
+.reader-row {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.reader-row:last-child {
+    border-bottom: 0;
+}
+
+.reader-name {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.reader-user-id {
+    display: inline-block;
+    color: var(--purple);
+    font-size: 12px;
+    background: #eee9ff;
+    padding: 4px 7px;
+    border-radius: 5px;
+}
+
+.reader-books {
+    margin-top: 7px;
+    color: #777;
+    font-size: 13px;
+}
+
+/* MODAL: Styles dialog overlays, forms, inputs, and centered popup panels. */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 12, 48, .52);
+    display: grid;
+    place-items: center;
+    z-index: 50;
+    padding: 20px;
+}
+
+.modal {
+    width: min(500px, 100%);
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, .25);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal h2 {
+    margin: 4px 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 30px;
+}
+
+.modal>p {
+    margin-top: 0;
+    color: #777;
+}
+
+.modal form {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.modal label {
+    display: grid;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.modal input,
+.modal select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #faf9fd;
+    outline: 0;
+    padding: 12px;
+}
+
+.modal input:focus,
+.modal select:focus {
+    border-color: #6b4aa6;
+    background: white;
+}
+
+.field-help {
+    color: #777;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    border: 0;
+    background: transparent;
+    font-size: 30px;
+    color: #555;
+}
+
+/* TOAST: Styles temporary feedback messages shown after user actions. */
+
+.toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: #271653;
+    color: white;
+    padding: 13px 18px;
+    border-radius: 9px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: .25s;
+    z-index: 100;
+    max-width: 350px;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* APP FOOTER: Styles the footer area at the bottom of the application. */
+
+.app-footer {
+    margin-top: auto;
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+.footer-content {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.footer-copyright {
+    margin: 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.footer-copyright strong {
+    color: var(--purple);
+}
+
+.footer-credit {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+}
+
+.footer-credit strong {
+    color: #271653;
+    font-weight: 700;
+}
+
+.heart {
+    color: #e5327c;
+    display: inline-block;
+    animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* RESPONSIVE: Adjusts navigation, grids, and spacing for smaller screens. */
+
+@media (max-width: 1150px) {
+    .sidebar {
+        width: 205px;
+    }
+
+    .main {
+        margin-left: 205px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-quote,
+    .hero-books {
+        display: none;
+    }
+
+    .record-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 850px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .app {
+        display: block;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 12px;
+    }
+
+    .nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nav-item {
+        justify-content: center;
+        flex-direction: column;
+        gap: 3px;
+        padding: 8px;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .nav-icon {
+        width: auto;
+    }
+
+    .sidebar-quote {
+        display: none;
+    }
+
+    .topbar {
+        margin-top: 8px;
+    }
+
+    .global-search {
+        width: 100%;
+    }
+
+    .dashboard-grid,
+    .records-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .record-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 550px) {
+    .filter-bar {
+        flex-direction: column;
+    }
+
+    .filter-bar select {
+        width: 100%;
+        height: 45px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .hero {
+        padding: 25px;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+    }
+
+    .record-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================================
+   LIBRARY BOOK RECORD SYSTEM ENHANCEMENTS (PROJECT 2)
+   ======================================================== */
+
+/* AVAILABLE BOOKS HIGHLIGHT: Emphasizes the available-book statistic and its pulse effect. */
+.highlight-available-card {
+    border: 1.5px solid #22c55e !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%) !important;
+    box-shadow: 0 4px 18px rgba(34, 197, 94, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight-available-card strong {
+    color: #15803d !important;
+}
+
+.live-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #15803d;
+    background: #dcfce7;
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 1px solid #bbf7d0;
+}
+
+.pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    animation: pulse-green 1.8s infinite;
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+/* COUNTER ANIMATION: Adds visual feedback when a statistic counter updates. */
+.count-updated {
+    animation: countPop 0.4s ease-out;
+}
+
+@keyframes countPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18); color: #16a34a; }
+    100% { transform: scale(1); }
+}
+
+/* TOPBAR AND HEADING ACTIONS: Refines action buttons and title alignment. */
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.topbar-add-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.heading-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.secondary-button {
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--purple-dark);
+    padding: 11px 16px;
+    border-radius: 9px;
+    font-weight: 700;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background: #f8f6fc;
+    border-color: #c9c3e2;
+    transform: translateY(-1px);
+}
+
+/* SEARCH AND FILTER CONTROLS: Refines the appearance of search and selection inputs. */
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+}
+
+.filter-controls select {
+    height: 40px;
+}
+
+.clear-search-btn {
+    border: 0;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    margin-left: 6px;
+    display: none;
+}
+
+.clear-search-btn:hover {
+    color: #11143e;
+    background: #f3f4f6;
+}
+
+.search-count-badge {
+    background: #eee9ff;
+    color: var(--purple);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 15px;
+    border-radius: 9px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    border: 1px solid #dfd7f5;
+}
+
+
+/* STRUCTURED TABLE DESIGN: Enhances spacing and visual hierarchy in book records. */
+.structured-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.structured-table th {
+    background: var(--purple-dark);
+    color: white;
+    padding: 14px 14px;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    border-top: 0;
+}
+
+.structured-table td {
+    padding: 14px 14px;
+    vertical-align: middle;
+}
+
+.col-sl {
+    font-weight: 700;
+    color: #8f8a9d;
+    text-align: center;
+}
+
+.book-id-badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-weight: 700;
+    font-size: 12.5px;
+    color: var(--purple-dark);
+    background: #f0edf9;
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid #dcd5f2;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.book-title-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.book-title-cell strong {
+    font-size: 14px;
+    color: #11143e;
+    line-height: 1.35;
+}
+
+.book-icon {
+    color: var(--purple);
+    font-size: 16px;
+    background: var(--purple-light);
+    padding: 9px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.author-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #374151;
+    font-weight: 500;
+    font-size: 13.5px;
+}
+
+.author-icon {
+    color: #9ca3af;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.genre-badge {
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 7px;
+    background: #f4f1fa;
+    color: var(--purple);
+    font-weight: 600;
+    font-size: 12px;
+    border: 1px solid #e7e2f5;
+}
+
+/* AVAILABLE BADGES: Styles labels that show book availability. */
+.available-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.available-in-stock {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.available-out-of-stock {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+/* DELETE BUTTON: Styles the destructive action used to remove a record. */
+.action-delete-btn {
+    border: 1px solid #fecdd3;
+    background: #fff1f2;
+    color: #e11d48;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.action-delete-btn:hover {
+    background: #e11d48;
+    color: white;
+    border-color: #e11d48;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25);
+}
+
+/* EMPTY STATE: Styles messages displayed when no records match or exist. */
+.empty-icon {
+    font-size: 42px;
+    color: #b3adc2;
+    margin-bottom: 12px;
+}
+
+.empty-state h3 {
+    margin: 0 0 6px;
+    color: #11143e;
+    font-size: 18px;
+}
+
+.empty-state p {
+    margin: 0 auto;
+    max-width: 480px;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.empty-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+/* MODAL ID INPUT: Aligns the ID field with its automatic ID action. */
+.id-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.id-input-group input {
+    flex: 1;
+}
+
+.secondary-btn-sm {
+    border: 1px solid var(--purple);
+    background: #f4efff;
+    color: var(--purple);
+    padding: 0 14px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.secondary-btn-sm:hover {
+    background: var(--purple);
+    color: white;
+}
+
+.modal-header {
+    margin-bottom: 18px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    border-top: 1px solid #f0edf8;
+    padding-top: 16px;
+}
+
+.required {
+    color: #e11d48;
+    font-weight: 700;
+}
+
+/* TOAST NOTIFICATION: Controls the appearance and animation of status messages. */
+.toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #1e1338;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-left: 4px solid var(--yellow);
+    max-width: 400px;
+    line-height: 1.4;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* ========================================================
+   USER PROFILE ID & READER PROFILES ENHANCEMENTS
+   ======================================================== */
+
+/* USER PROFILE BADGE: Styles the profile summary shown in the top bar. */
+.user-profile-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    padding: 6px 14px 6px 8px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(45, 25, 90, 0.05);
+}
+
+.user-profile-badge:hover {
+    border-color: var(--purple);
+    background: #faf8ff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(59, 33, 116, 0.12);
+}
+
+.profile-avatar {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b2174 0%, #5b35ad 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.online-indicator {
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #22c55e;
+    border: 2px solid #ffffff;
+}
+
+.profile-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.25;
+}
+
+.profile-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.profile-id-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--purple);
+    background: var(--purple-light);
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-top: 2px;
+}
+
+/* USER ID CHIP: Highlights profile or reader identifiers in tables. */
+.user-id-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f0edf9;
+    color: #3b2174;
+    border: 1px solid #dcd5f0;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.user-id-chip:hover {
+    background: #3b2174;
+    color: #ffffff;
+    border-color: #3b2174;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(59, 33, 116, 0.2);
+}
+
+/* READER DIRECTORY: Styles reader profile cards and their details. */
+.reader-profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    padding: 16px 0;
+}
+
+.reader-profile-card {
+    background: #ffffff;
+    border: 1px solid #e7e4f2;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.reader-profile-card:hover {
+    border-color: var(--purple);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 33, 116, 0.08);
+}
+
+.rpc-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.rpc-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #eee9ff;
+    color: var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.rpc-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.rpc-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rpc-phone {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+}
+
+.rpc-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    background: #faf9fd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 12px;
+}
+
+.rpc-stat-item strong {
+    display: block;
+    font-size: 14px;
+    color: var(--purple-dark);
+}
+
+.rpc-stat-item span {
+    color: #666;
+    font-size: 11px;
+}
+
+.rpc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-top: 1px solid #f0edf8;
+    padding-top: 10px;
+}
+
+/* PROFILE MODALS: Controls profile dialog layout and form styling. */
+.profile-modal-card,
+.reader-profile-modal-card {
+    width: min(540px, 100%) !important;
+}
+
+.profile-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.profile-modal-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #3b2174 0%, #24154d 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: 0 6px 16px rgba(59, 33, 116, 0.25);
+}
+
+.reader-avatar-bg {
+    background: linear-gradient(135deg, #168352 0%, #0d5233 100%) !important;
+    box-shadow: 0 6px 16px rgba(22, 131, 82, 0.25) !important;
+}
+
+/* PROFILE ID HIGHLIGHT: Draws attention to the current profile identifier. */
+.profile-id-highlight-box {
+    background: linear-gradient(135deg, #f7f5fd 0%, #eee9ff 100%);
+    border: 1.5px dashed #c4b9e8;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+}
+
+.profile-id-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--purple);
+    letter-spacing: 0.5px;
+}
+
+.profile-id-display {
+    font-family: monospace;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--purple-dark);
+    margin: 6px 0 4px;
+    letter-spacing: 1px;
+}
+
+.copy-id-btn {
+    border: 1px solid #d4cbf2;
+    background: #ffffff;
+    color: var(--purple);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.copy-id-btn:hover {
+    background: var(--purple);
+    color: #ffffff;
+    border-color: var(--purple);
+}
+
+.rpm-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 12.5px;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.status-pill.status-has-fines {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+
+/* PROFILE QUICK STATS: Displays summary counts inside the profile dialog. */
+.profile-quick-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 14px 0;
+}
+
+.profile-stat-box {
+    background: #faf9fd;
+    border: 1px solid #eae7f3;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.profile-stat-box .stat-num {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--purple-dark);
+}
+
+.profile-stat-box .stat-txt {
+    font-size: 11px;
+    color: #666;
+    margin-top: 2px;
+}
+
+/* READER BOOK LISTS: Styles book details associated with a reader profile. */
+.rpm-sections h4 {
+    margin: 12px 0 8px;
+    font-size: 13px;
+    color: var(--purple-dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.rpm-book-list {
+    max-height: 160px;
+    overflow-y: auto;
+    border: 1px solid #edeaf5;
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.rpm-book-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    border-bottom: 1px solid #f2eff8;
+    font-size: 12.5px;
+}
+
+.rpm-book-item:last-child {
+    border-bottom: none;
+}
+
+.rpm-book-item strong {
+    color: var(--text);
+}
+
+.rpm-book-item small {
+    display: block;
+    color: #777;
+    font-size: 11px;
+}
+
+.rpm-empty-list {
+    padding: 16px;
+    text-align: center;
+    color: #888;
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* ========================================================
+   TRENDING LOOK: EDITABLE IDS & NEO-GLASSMORPHISM BADGES
+   ======================================================== */
+
+/* ID FONT: Keeps identifiers visually consistent and easy to distinguish. */
+.trending-code-font,
+.profile-id-display,
+.user-id-chip,
+.trending-id-input,
+.profile-id-pill,
+.book-id-badge {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Consolas, monospace !important;
+    letter-spacing: 0.6px;
+}
+
+/* TOPBAR PROFILE PILL: Highlights the profile ID badge in the header. */
+.trending-profile-pill {
+    background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%) !important;
+    border: 1px solid #c4b5fd !important;
+    color: #4c1d95 !important;
+    padding: 2px 9px 2px 7px !important;
+    border-radius: 12px !important;
+    transition: all 0.2s ease !important;
+}
+
+.user-profile-badge:hover .trending-profile-pill {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
+    color: #ffffff !important;
+    border-color: #7c3aed !important;
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+}
+
+.pill-edit-icon {
+    font-size: 8.5px;
+    opacity: 0.7;
+    margin-left: 3px;
+    transition: transform 0.2s ease;
+}
+
+.user-profile-badge:hover .pill-edit-icon {
+    transform: rotate(15deg) scale(1.15);
+    opacity: 1;
+}
+
+/* EDITABLE BADGE: Indicates fields or identifiers that can be changed. */
+.trending-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #7c3aed;
+    background: #f5f3ff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd6fe;
+}
+
+/* ID INPUT WRAPPER: Groups the ID icon and text field together. */
+.trending-id-input-wrapper {
+    display: flex;
+    align-items: stretch;
+    background: #ffffff;
+    border: 1.5px solid #c4b5fd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.06);
+}
+
+.trending-id-input-wrapper:focus-within {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15), 0 4px 16px rgba(124, 58, 237, 0.12);
+}
+
+.trending-id-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    background: linear-gradient(135deg, #7c3aed 0%, #581c87 100%);
+    color: #ffffff;
+    font-size: 14px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.trending-id-input {
+    flex: 1;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    padding: 11px 14px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #2e1065 !important;
+    text-transform: uppercase;
+}
+
+.trending-id-input::placeholder {
+    color: #a78bfa;
+    text-transform: none;
+    font-weight: 500;
+}
+
+.trending-id-action-btn {
+    border: none;
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+    color: #6d28d9;
+    padding: 0 16px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    border-left: 1px solid #ddd6fe;
+    transition: all 0.2s ease;
+}
+
+.trending-id-action-btn:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    color: #ffffff;
+}
+
+/* HIGHLIGHT BOX: Emphasizes important ID information and display values. */
+.trending-highlight-box {
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%) !important;
+    border: 1.5px solid #c4b5fd !important;
+    box-shadow: 0 6px 24px -4px rgba(124, 58, 237, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+    position: relative;
+}
+
+.highlight-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trending-edit-btn {
+    border: 1px solid #c4b5fd;
+    background: #ffffff;
+    color: #6d28d9;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.trending-edit-btn:hover {
+    background: #7c3aed;
+    color: #ffffff;
+    border-color: #7c3aed;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(124, 58, 237, 0.25);
+}
+
+.profile-id-display-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 8px 0 6px;
+}
+
+.quick-pencil-btn {
+    border: 1px dashed #a78bfa;
+    background: rgba(255, 255, 255, 0.7);
+    color: #6d28d9;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quick-pencil-btn:hover {
+    background: #6d28d9;
+    color: white;
+    border-color: #6d28d9;
+    transform: scale(1.04);
+}
+
+.trending-save-btn {
+    border: none;
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    color: white;
+    padding: 0 16px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+}
+
+.trending-save-btn:hover {
+    background: #15803d;
+    box-shadow: 0 0 12px rgba(22, 163, 74, 0.4);
+}
+
+.trending-cancel-btn {
+    border: none;
+    background: #f1f5f9;
+    color: #64748b;
+    padding: 0 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.trending-cancel-btn:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+/* TABLE USER ID CHIP: Refines identifier badges inside record tables. */
+.user-id-chip {
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+    color: #581c87 !important;
+    border: 1.5px solid #d8b4fe !important;
+    padding: 4px 11px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 6px rgba(124, 58, 237, 0.08) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.user-id-chip:hover {
+    background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%) !important;
+    color: #ffffff !important;
+    border-color: #6d28d9 !important;
+    transform: translateY(-2px) scale(1.03) !important;
+    box-shadow: 0 6px 18px rgba(109, 40, 217, 0.35) !important;
+}
+
+.user-id-chip::after {
+    content: " ✎";
+    font-size: 9.5px;
+    opacity: 0.6;
+    margin-left: 2px;
+}
+
+.user-id-chip:hover::after {
+    opacity: 1;
+    color: #ffd36c;
+}
+
+/* RECORD ACTION BUTTONS: Groups edit and delete controls within a book row. */
+.action-btn-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+}
+
+.action-edit-btn {
+    border: 1px solid #c4b5fd;
+    background: #f5f3ff;
+    color: #6d28d9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-edit-btn:hover {
+    background: #6d28d9;
+    color: #ffffff;
+    border-color: #6d28d9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(109, 40, 217, 0.25);
+}
+
+.clickable-id {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clickable-id:hover {
+    transform: scale(1.05);
+    border-color: #7c3aed;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
+}
+
+/* ADD BOOK PAGE: Keeps the new-record form consistent with the rest of the interface. */
+.add-book-panel {
+    max-width: 820px;
+}
+
+.add-book-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 20px;
+    margin-top: 18px;
+}
+
+.add-book-form label {
+    display: grid;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.add-book-form input,
+.add-book-form select {
+    width: 100%;
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #faf9fd;
+    outline: 0;
+    padding: 12px;
+    color: var(--text);
+}
+
+.add-book-form input:focus,
+.add-book-form select:focus {
+    border-color: #6b4aa6;
+    background: white;
+}
+
+.add-book-form .id-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.add-book-form .field-help {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.add-book-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+}
+
+@media (max-width: 650px) {
+    .add-book-form {
+        grid-template-columns: 1fr;
+    }
+
+    .add-book-panel {
+        padding: 14px;
+    }
+
+    .add-book-actions {
+        justify-content: stretch;
+    }
+
+    .add-book-actions button {
+        flex: 1;
+    }
+}
+
+
+/* TABLET AND MOBILE PROFILE: Simplifies the top bar by showing only the profile icon. */
+@media screen and (max-width: 768px) {
+    .user-profile-badge {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        gap: 0;
+    }
+
+    .user-profile-badge .profile-meta {
+        display: none !important;
+    }
+
+    .user-profile-badge .profile-avatar {
+        margin: 0;
+        flex-shrink: 0;
+    }
+}
+
+/* DASHBOARD AUTHOR LIST: Styles author summary rows on the dashboard. */
+#dashboardAuthorList .record-row { align-items: center; }
+#dashboardAuthorList .author-icon { color: var(--purple); }

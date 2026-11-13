@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<!-- Document type declaration tells the browser to use modern HTML standards. -->
+<html lang="en">
+
+<head>
+    <!-- Character encoding supports standard text and symbols correctly. -->
+    <meta charset="UTF-8">
+    <!-- Viewport settings make the layout adapt to mobile and tablet screen widths. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Text displayed in the browser tab. -->
+    <title>Librivanta - Library Book Record System</title>
+
+    <link href="../Assets/img/Librivanta.png" rel="shortcut icon" type="image/png">
+
+    <!-- External icon library used for navigation, buttons, and status icons. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <!-- Loads the project styles from style.css. -->
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body>
+    <!-- BODY: Contains all visible application content and interactive interface elements. -->
+
+    <!-- APP WRAPPER: Groups the sidebar and main content into one application layout. -->
+    <div class="app">
+
+        <!-- SIDEBAR: Brand identity and navigation buttons for switching pages. -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-logo">
+                    <div class="logo-book book-one"></div>
+                    <div class="logo-book book-two"></div>
+                </div>
+                <div class="brand-name">
+                    Librivanta
+                </div>
+                <div class="brand-subtitle">
+                    Library Book Record System
+                </div>
+            </div>
+
+            <nav class="nav">
+                <button class="nav-item active" data-page="dashboard" id="nav-dashboard">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </span>
+                    <span>Dashboard</span>
+                </button>
+
+                <button class="nav-item" data-page="book-records" id="nav-book-records">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </span>
+                    <span>Book Records</span>
+                </button>
+
+                <button class="nav-item" data-page="add-book" id="nav-add-book">
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </span>
+                    <span>Add Book</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-quote">
+                <em>
+                    "Today a reader,<br>
+                    tomorrow a leader."
+                </em>
+                <small>
+                    — Margaret Fuller
+                </small>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT: Holds the top bar and the active application page. -->
+        <main class="main">
+
+            <!-- TOP BAR: Global search, quick Add Book button, and user profile access. -->
+            <header class="topbar">
+                <div class="global-search">
+                    <span class="search-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input id="globalSearch" type="search" placeholder="Search books by ID, author, or title...">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="primary-button topbar-add-btn" id="topbarAddBookBtn">
+                        <i class="fa-solid fa-plus"></i> 
+                    </button>
+
+                    <!-- USER PROFILE ID BADGE (LIBRARIAN / ADMIN) -->
+                    <button class="user-profile-badge" id="openUserProfileBtn" type="button" title="View & Manage User Profile">
+                        <div class="profile-avatar">
+                            <i class="fa-solid fa-user-shield"></i>
+                            <span class="online-indicator"></span>
+                        </div>
+                        <div class="profile-meta">
+                            <span class="profile-name" id="topbarProfileName">Igniters</span>
+                            <span class="profile-id-pill trending-profile-pill" id="topbarProfileId" title="Click to view & edit Profile ID">
+                                <i class="fa-solid fa-id-badge"></i> 
+                                <span id="topbarProfileIdText">LIB-USR-2026</span>
+
+                                <span class="pill-edit-icon">
+                                    <i class="fa-solid fa-pen"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </button>
+                </div>
+            </header>
+
+
+            <!-- 1. DASHBOARD PAGE: Summary cards and recent book/author information. -->
+            <section id="dashboard" class="page active-page">
+
+                <!-- HERO -->
+                <div class="hero">
+                    <div class="hero-content">
+                        <h1>
+                            Library Book Record System
+                        </h1>
+                        <p>
+                            Record Books with IDs • Search by Title or Author • Track Live Available Books
+                        </p>
+
+                        <div class="hero-actions">
+                            <button class="primary-button hero-btn" data-page-link="book-records">
+                                <i class="fa-solid fa-table-list"></i> 
+                                View Book Records
+                            </button>
+                            <button class="secondary-button hero-btn" id="heroAddBookBtn">
+                                <i class="fa-solid fa-plus"></i> 
+                                Add New Book
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="hero-quote">
+                        <em>
+                            "Books are a uniquely<br>
+                            portable magic."
+                        </em>
+                        <small>
+                            — Stephen King
+                        </small>
+                    </div>
+
+                    <div class="hero-books">
+                        <div class="hero-book green-book"></div>
+                        <div class="hero-book pink-book"></div>
+                        <div class="hero-book blue-book"></div>
+                    </div>
+                </div>
+
+                <!-- STAT CARDS WITH DYNAMIC AVAILABLE BOOKS -->
+
+                <div class="stats-grid">
+                    <div class="stat-card highlight-available-card">
+                        <div class="stat-icon green-icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <strong id="availableBooksStat">0</strong>
+                            <span>Total Books</span>
+                            <small class="live-pill">
+                                <span class="pulse-dot"></span> 
+                                Live Dynamic
+                            </small>
+                        </div>  
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon purple-icon">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <strong id="totalTitlesStat">0</strong>
+                            <span>Total Book Titles</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange-icon">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                        </div>
+                        <div class="stat-info">
+                            <strong id="totalBooksStat">0</strong>
+                            <span>Available Books</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue-icon">
+                            <i class="fa-solid fa-user-pen"></i>
+                        </div>
+                        <div class="stat-info">
+                            <strong id="totalAuthorsStat">0</strong>
+                            <span>Total Authors</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD LOWER SECTION -->
+
+                <div class="dashboard-grid">
+
+                    <!-- QUICK BOOK RECORDS PREVIEW -->
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div>
+                                <h2>
+                                    Book Collection Preview
+                                </h2>
+                                <p>
+                                    Latest cataloged library books
+                                </p>
+                            </div>
+                            <button class="text-button" data-page-link="book-records">
+                                Full Records Table →
+                            </button>
+                        </div>
+
+                        <div id="dashboardBookList"></div>
+                    </div>
+
+                    <!-- AUTHOR OVERVIEW -->
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div>
+                                <h2>Authors Overview</h2>
+                                <p>Authors represented in the library collection</p>
+                            </div>
+                            <button class="text-button" data-page-link="book-records">View Books →</button>
+                        </div>
+                        <div id="dashboardAuthorList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. BOOK RECORDS PAGE: Search, genre filter, and the complete book table. -->
+            <section id="book-records" class="page">
+
+                <div class="page-heading">
+                    <div>
+
+                        <h2>
+                            Library Book Record System
+                        </h2>
+                        <p>
+                            Add library book details (title, author, and book ID), search records by title or author,
+                            delete individual records, and view total available books dynamically.
+                        </p>
+                    </div>
+
+                    <div class="heading-btn-group">
+                        <button id="openAddBookPage" class="primary-button">
+                            <i class="fa-solid fa-plus"></i> Add Book
+                        </button>
+
+                    </div>
+                </div>
+
+                <!-- SEARCH & FILTER BAR -->
+
+                <div class="filter-bar book-filter-bar">
+                    <div class="filter-search">
+                        <span class="search-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                        <input id="bookSearchInput" type="search" placeholder="Search books by ID, author, or title...">
+                        <button id="clearBookSearch" class="clear-search-btn hidden" title="Clear search">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <div class="filter-controls">
+                        <select id="bookGenreFilter">
+                            <option value="">All Genres</option>
+                        </select>
+                        <div class="search-count-badge" id="bookSearchCount">
+                            Showing all records
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STRUCTURED TABLE -->
+
+                <div class="panel table-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>
+                                Structured Book Records Table
+                            </h2>
+                            <p id="tableSubheading">
+                                Full database of books with Book ID, Title, Author, and Availability.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="structured-table">
+
+                            <!-- Table Header: Defines the column headings for the book records, including book details, copy availability, and available actions. -->
+                            <thead>
+                                <tr>
+                                    <th style="width: 70px;">SL. NO</th>
+                                    <th>BOOK ID</th>
+                                    <th>BOOK TITLE</th>
+                                    <th>AUTHOR NAME</th>
+                                    <th>GENRE</th>
+                                    <th>TOTAL COPIES</th>
+                                    <th>AVAILABLE COPIES</th>
+                                    <th style="text-align: center; width: 140px;">ACTION</th>
+                                </tr>
+                            </thead>
+
+                            <!-- Books Table Body: Dynamically displays book records added to the library using JavaScript. -->
+                            <tbody id="booksTableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Empty State: Shown when no matching book records are found. -->
+                    <div id="booksEmptyState" class="empty-state hidden">
+                        <div class="empty-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <h3 id="emptyHeading">No Book Records Found</h3>
+                        <p id="emptyMsg">
+                            No books match your search query. Try searching for a different title or author, or add a
+                            new book record.
+                        </p>
+                        <div class="empty-actions">
+                            <button id="emptyClearSearchBtn" class="secondary-button hidden">
+                                Clear Search
+                            </button>
+                            <button id="emptyAddBookBtn" class="primary-button">
+                                ＋ Add New Book Record
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 3. ADD BOOK PAGE: Form used to create a new book record or add copies. -->
+            <section id="add-book" class="page">
+                <div class="page-heading">
+                    <div>
+                        <h2>Add Library Book</h2>
+                        <p>Enter the book details to add a new record to the structured library database.</p>
+                    </div>
+                </div>
+
+                <div class="panel add-book-panel">
+                    <div class="panel-header">
+                        <div>
+                            <h2>Book Information</h2>
+                            <p>Fields marked with * are required.</p>
+                        </div>
+                    </div>
+
+                    <form id="bookForm" class="add-book-form">
+                        <label>
+                            <span>Book Title <span class="required">*</span></span>
+                            <input type="text" name="title" id="bookTitleInput" placeholder="e.g. To Kill a Mockingbird" required>
+                        </label>
+
+                        <label>
+                            <span>Author Name <span class="required">*</span></span>
+                            <input type="text" name="author" id="bookAuthorInput" placeholder="e.g. Harper Lee" required>
+                        </label>
+
+                        <label>
+                            <span>Book ID <span class="required">*</span></span>
+                            <div class="id-input-group">
+                                <input type="text" name="id" id="bookIdInput" placeholder="e.g. BK-101" required>
+                                <button type="button" id="autoGenerateBookIdBtn" class="secondary-btn-sm" title="Generate next unique Book ID">
+                                    <i class="fa-solid fa-arrows-rotate"></i> Auto ID
+                                </button>
+                            </div>
+                            <small class="field-help" id="bookIdStatusMsg">Type any custom Book ID or click Auto ID to generate one.</small>
+                        </label>
+
+                        <label>
+                            <span>Genre / Category <span class="required">*</span></span>
+                            <select name="genre" id="bookGenreSelect" required>
+                                <option value="">Select Genre</option>
+                                <option value="Fiction">Fiction</option>
+                                <option value="Programming">Programming</option>
+                                <option value="Science">Science</option>
+                                <option value="History">History</option>
+                                <option value="Education">Education</option>
+                                <option value="Business">Business</option>
+                                <option value="Philosophy">Philosophy</option>
+                                <option value="Cooking">Cooking</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            <span>Total Copies to Add <span class="required">*</span></span>
+                            <input type="number" name="copies" id="bookCopiesInput" min="1" max="500" value="1" required>
+                        </label>
+
+                        <div class="add-book-actions">
+                            <button type="button" id="cancelAddBookBtn" class="text-button">Cancel</button>
+                            <button type="submit" class="primary-button"><i class="fa-solid fa-plus"></i> Save Book Record</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+
+            <!-- 4. FOOTER: Closing information displayed at the bottom of the application. -->
+            <footer class="app-footer">
+                <div class="footer-content">
+                    <p class="footer-copyright">
+                        &copy; 2026 <strong>Librivanta - Library Book Record System</strong>.
+                    </p>
+                    <p class="footer-credit">
+                        Designed &amp; Developed with <span class="heart">❤️</span>by Team Igniters.
+                    </p>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- USER PROFILE MODAL: View and update librarian profile details. -->
+    <div id="userProfileModal" class="modal-backdrop hidden">
+        <div class="modal profile-modal-card">
+            <button id="closeUserProfileModal" class="modal-close" title="Close modal">×</button>
+            <div class="modal-header profile-modal-header">
+                <div class="profile-modal-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span class="online-indicator"></span>
+                </div>
+                <div>
+                    <div class="eyebrow">SYSTEM USER PROFILE</div>
+                    <h2 id="modalProfileHeading">Igniters Profile</h2>
+                    <p>Manage active account credentials &amp; User Profile ID.</p>
+                </div>
+            </div>
+
+            <form id="userProfileForm">
+                <div class="profile-id-highlight-box">
+                    <div class="profile-id-label">
+                        <span><i class="fa-solid fa-fingerprint"></i> ACTIVE USER PROFILE ID</span>
+                        <button type="button" id="copyProfileIdBtn" class="copy-id-btn" title="Copy User Profile ID">
+                            <i class="fa-solid fa-copy"></i> Copy ID
+                        </button>
+                    </div>
+                    <div class="profile-id-display" id="profileIdDisplay">LIB-USR-2026</div>
+                    <small>This unique ID identifies your administrative account.</small>
+                </div>
+
+                <label>
+                    <span>Staff / User Name <span class="required">*</span></span>
+                    <input type="text" name="userName" id="profileNameInput" value="Admin Librarian" required>
+                </label>
+
+                <label>
+                    <span>Custom User Profile ID <span class="required">*</span></span>
+                    <div class="id-input-group">
+                        <input type="text" name="userId" id="profileIdInput" value="LIB-USR-2026" required>
+                        <button type="button" id="resetProfileIdBtn" class="secondary-btn-sm" title="Generate New ID">
+                            <i class="fa-solid fa-arrows-rotate"></i> New ID
+                        </button>
+                    </div>
+                    <small class="field-help">Unique identification code for this profile session.</small>
+                </label>
+
+                <label>
+                    <span>Role / Designation</span>
+                    <input type="text" name="role" id="profileRoleInput" value="Chief Librarian &amp; System Admin" required>
+                </label>
+
+                <label>
+                    <span>Contact Email</span>
+                    <input type="email" name="email" id="profileEmailInput" value="librarian@librivanta.edu">
+                </label>
+
+                <div class="profile-quick-stats">
+                    <div class="profile-stat-box">
+                        <span class="stat-num" id="profileStatBooks">0</span>
+                        <span class="stat-txt">Catalog Books</span>
+                    </div>
+                    <div class="profile-stat-box">
+                        <span class="stat-num" id="profileStatAuthors">0</span>
+                        <span class="stat-txt">Total Authors</span>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" id="cancelProfileBtn" class="text-button">Close</button>
+                    <button type="submit" class="primary-button">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Profile
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- EDIT BOOK MODAL: Edit the ID, title, author, genre, and copy count. -->
+    <div id="editBookModal" class="modal-backdrop hidden">
+        <div class="modal">
+            <button id="closeEditBookModal" class="modal-close" onclick="closeEditBookModal()" title="Close modal">×</button>
+            <div class="modal-header">
+                <div class="eyebrow">CATALOG UPDATE</div>
+                <h2>Edit Library Book</h2>
+                <p>Modify book ID, title, author, category or available copies.</p>
+            </div>
+
+            <form id="editBookForm">
+                <input type="hidden" id="editOriginalBookId">
+
+                <label>
+                    <span style="display: flex; justify-content: space-between;">
+                        <span>Book ID <span class="required">*</span></span>
+                        <span class="trending-badge-pill"><i class="fa-solid fa-pen-to-square"></i> Editable</span>
+                    </span>
+                    <div class="trending-id-input-wrapper">
+                        <span class="trending-id-icon"><i class="fa-solid fa-barcode"></i></span>
+                        <input type="text" name="id" id="editBookIdInput" class="trending-id-input" placeholder="e.g. BK-101" required>
+                    </div>
+                    <small class="field-help" id="editBookIdStatus">Update the unique ID for this book record.</small>
+                </label>
+
+                <label>
+                    <span>Book Title <span class="required">*</span></span>
+                    <input type="text" name="title" id="editBookTitleInput" placeholder="Book Title" required>
+                </label>
+
+                <label>
+                    <span>Author Name <span class="required">*</span></span>
+                    <input type="text" name="author" id="editBookAuthorInput" placeholder="Author Name" required>
+                </label>
+
+                <label>
+                    <span>Genre / Category <span class="required">*</span></span>
+                    <select name="genre" id="editBookGenreSelect" required>
+                        <option value="Fiction">Fiction</option>
+                        <option value="Programming">Programming</option>
+                        <option value="Science">Science</option>
+                        <option value="History">History</option>
+                        <option value="Education">Education</option>
+                        <option value="Business">Business</option>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="Cooking">Cooking</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Total Copies <span class="required">*</span></span>
+                    <input type="number" name="copies" id="editBookCopiesInput" min="1" max="500" required>
+                </label>
+
+                <div class="modal-actions">
+                    <button type="button" class="text-button" onclick="closeEditBookModal()">Cancel</button>
+                    <button type="submit" class="primary-button">
+                        <i class="fa-solid fa-floppy-disk"></i> Update Book Record
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+
+    <!-- TOAST MESSAGE: Temporary feedback messages are inserted here by JavaScript. -->
+    <div id="toast" class="toast"></div>
+
+    <!-- JavaScript is loaded after the HTML elements so it can find and control them. -->
+    <script src="../JS/script.js"></script>
+
+</body>
+
+</html>
